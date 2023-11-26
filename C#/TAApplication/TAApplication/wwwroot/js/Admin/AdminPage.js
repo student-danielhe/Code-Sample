@@ -1,0 +1,1 @@
+﻿$("#roles_table").DataTable();

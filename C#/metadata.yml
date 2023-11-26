@@ -1,0 +1,14 @@
+---
+:id: 154268391
+:submitters:
+- :name: RAY PARKER
+  :email: u1054697@utah.edu
+- :name: DANIEL HE
+  :email: u1201429@utah.edu
+:created_at: !ruby/object:ActiveSupport::TimeWithZone
+  utc: 2022-12-14 02:23:51.380921000 Z
+  zone: !ruby/object:ActiveSupport::TimeZone
+    name: America/Los_Angeles
+  time: 2022-12-13 18:23:51.380921000 Z
+:status: processed
+:score: 90.0

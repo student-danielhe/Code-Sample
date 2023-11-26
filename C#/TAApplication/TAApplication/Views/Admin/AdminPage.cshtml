@@ -1,0 +1,78 @@
+﻿<!--
+  Authors:   Ray Parker and Daniel He
+  Date:      September 27th, 2022
+  Course:    CS 4540, University of Utah, School of Computing
+  Copyright: CS 4540 and Daniel He and Ray Parker - This work may not be copied for use in Academic Coursework.
+  We, Daniel He and Ray Parker, certify that we wrote this code from scratch and did not copy it in part or whole from
+  another source.  Any references used in the completion of the assignment are cited in my README file.
+
+  File Contents:
+  This page is accessible only to admins, and it shows a list of users and roles and how they interact. The switches are interactable
+  and should be able to toggle roles between different users.
+-->
+
+@using TAApplication.Areas.Data
+@using Microsoft.AspNetCore.Identity
+@inject UserManager<TAUser> um;
+@inject RoleManager<IdentityRole> rm;
+
+@{
+    ViewData["Title"] = "Admin Page";
+}
+
+<head>
+
+    @section Styles {
+        <link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/dataTables.bootstrap5.min.css" />
+    }
+
+    @section Scripts {
+        <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+        <script src="https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap5.min.js"></script>
+        <script src="~/js/Admin/AdminPage.js"></script>
+    }
+</head>
+
+    <table id="roles_table">
+        <thead>
+            <tr>
+                <th>User</th>
+                <th>Unid</th>
+                <!-- Loop over all existing roles in the database in order to print them to the table-->
+                @foreach(var Role in rm.Roles) {
+                    <th>
+                        @Role
+                    </th>
+                }
+            </tr>
+        </thead>
+
+        <tbody>
+        @foreach (var User in um.Users)
+        {
+            <tr>
+                <td>
+                    @User.UserName
+                </td>
+                <td>
+                    @User.Unid
+                </td>
+
+                @foreach(var Role in rm.Roles) {
+                    <td>
+                        @if (await um.IsInRoleAsync(User, Role.ToString()))
+                        {
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked">
+                            </div>
+                        } else {
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
+                            </div>
+                        }
+                    </td>
+                }
+            </tr>
+        }
+        </tbody>
+    </table>

@@ -1,0 +1,172 @@
+﻿@using TAApplication.Areas.Data
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<TAUser> SignInManager
+@inject UserManager<TAUser> UserManager
+@using System;
+@using System.Collections.Generic;
+@using System.Linq;
+@using System.Threading.Tasks;
+@using Microsoft.AspNetCore.Mvc;
+@using Microsoft.AspNetCore.Mvc.Rendering;
+@using Microsoft.EntityFrameworkCore;
+@using TAApplication.Data;
+@using TAApplication.Models;
+@using TAApplication.Areas.Data;
+@using Microsoft.AspNetCore.Identity;
+@using Microsoft.AspNetCore.Authorization;
+@using static System.Net.Mime.MediaTypeNames;
+@using Application = TAApplication.Models.Application;
+@inject ApplicationDbContext _context
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - TA Application</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/.styles.css" asp-append-version="true" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://getbootstrap.com/docs/5.2/assets/css/docs.css" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+            <div class="container-fluid">
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">TA Application</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                    <ul class="navbar-nav flex-grow-1">
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                        </li>
+                        <!-- Only displays the NavBar link the current user can use -->
+                        @if (User.IsInRole("Applicant"))
+                        {
+                            var user = await UserManager.GetUserAsync(User);
+                            var application = await _context.Applicants.FirstOrDefaultAsync(m => m.User == user);
+                            if (application == null)
+                            {
+                                <li><a class="nav-link text-dark" asp-area="" asp-controller="Applications" asp-action="Create">Application Create</a></li>
+                            }
+                            else
+                            {
+                                <li><a class="nav-link text-dark" asp-area="" asp-controller="Applications" asp-action="Details">Application Details</a></li>
+                                //PS8 link
+                                <li><a class="nav-link text-dark" asp-area="" asp-controller="Slots" asp-action="Index">View Availability</a></li>
+
+                            }
+                            
+                        }
+                        
+                        @if (User.IsInRole("Admin"))
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Admin" asp-action="AdminPage">Admin Page</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Applications" asp-action="Index">Application Index</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Courses" asp-action="Index">Courses List</a>
+                            </li>
+                        }
+
+                        @if (User.IsInRole("Professor"))
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Applications" asp-action="List">Application List</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Courses" asp-action="Index">Courses List</a>
+                            </li>
+                        }
+                            <!-- Only displays the Privacy page to logged in users -->
+                        @if (SignInManager.IsSignedIn(User))
+                        {
+
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                            </li>
+                            
+                        }
+
+
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" aria-expanded="false">TAs</a>
+                            <ul class="dropdown-menu">
+                                <li class="nav-item">
+                                    Daniel He
+                                </li>
+                                <li class="nav-item">
+                                    Ray Parker
+                                </li>
+
+                                <hr />
+                                <li class="nav-item">
+                                    PS9
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Admin" asp-action="EnrollmentTrends">EnrollmentTrends View</a>
+                                </li>
+
+                                <hr />
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Slots" asp-action="Index">Availability Page</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Applications" asp-action="Details">Applicant Main Page</a>
+                                </li>
+                                <hr />
+                                <li class="nav-item">
+                                    PS6
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Courses" asp-action="List">Courses List</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Courses" asp-action="Details1">1st Course - Details</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Courses" asp-action="Edit1">1st Course - Edit </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Courses" asp-action="Create">Create New Course</a>
+                                </li>
+                            </ul>
+                        </li>
+
+                    </ul>
+
+
+                    <ul>
+
+                    </ul>
+                    <partial name="_LoginPartial" />
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="border-top footer text-muted">
+        <div class="container">
+            &copy; 2022 - TAApplication - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+        </div>
+    </footer>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+
+    @await RenderSectionAsync("Styles", required:false);
+    @await RenderSectionAsync("Scripts", required:false);
+</body>
+</html>

@@ -1,0 +1,137 @@
+﻿<!--
+  Authors:   Ray Parker and Daniel He
+  Date:      September 27th, 2022
+  Course:    CS 4540, University of Utah, School of Computing
+  Copyright: CS 4540 and Daniel He and Ray Parker - This work may not be copied for use in Academic Coursework.
+  We, Daniel He and Ray Parker, certify that we wrote this code from scratch and did not copy it in part or whole from
+  another source.  Any references used in the completion of the assignment are cited in my README file.
+
+  File Contents:
+    This webpage is used for viewing all the details about a specific TA applicant. Currently it's the same page
+    for each applicant, because we're currently using placeholder data to show off this webpage. Only the applicant
+    u0000000 can access this page (as well as Professors and Admins).
+-->
+
+@{
+    ViewData["Title"] = "Application Details Page";
+}
+
+<div class="text-center">
+    
+    <p> <div class="container">
+        <main>
+            <div class="py-5 text-center">
+
+                <h2>Application Details</h2>
+            </div>
+            <div class="row mb-3 text-center">
+                <div class="col-md-8 themed-grid-col">
+                    <div class="col-md-7 col-lg-8">
+                        <h4 class="mb-3">Applicant Information</h4>
+                        <div class="table-responsive">
+                            <table class="table table-striped table-sm">
+                                <thead class="align-middle">
+                                    <tr>
+                                        <th>First Name</th>
+                                        <td>Danny</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Last Name</th>
+                                        <td>DeVito</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Courses Applied For</th>
+                                        <td>CS2420, CS3500</td>
+                                    </tr>
+                                    <tr>
+                                        <th>U of U GPA</th>
+                                        <td>2.9</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Address 1</th>
+                                        <td> 1234 Really Cool Address</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Address 2 (Optional)</th>
+                                        <td>-</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Department</th>
+                                        <td>Computer Science</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Gender</th>
+                                        <td>Male</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Age</th>
+                                        <td>77</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Living in SLC?</th>
+                                        <td>No</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Fluent in English?</th>
+                                        <td>Yes</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Phone Number</th>
+                                        <td>(555) 666-7777</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Email Address</th>
+                                        <td>dannydevitoissupercool@fakeemail.com</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Other Contact Method (Optional)</th>
+                                        <td>-</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Preferred Contact Method</th>
+                                        <td>Email</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Personal Statement</th>
+                                        <td>"It's fun to be on the edge. I think you do your best work when you take chances, when you're not safe, when you're not in the middle of the road, at least for me, anyway."</td>
+                                    </tr>
+                                </thead>
+                            </table>
+                        </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 themed-grid-col">
+                        <div>
+                            <img class="p-5 mb-4 mx-auto rounded-3 img-fluid" src="Picture/DannyDevito.png" alt="Danny Devito Profile Picture">
+                        </div>
+                        <div> <!-- Create an application button; accessible only to applicant roles -->
+
+                        </div>
+                    </div>
+                </div></p>
+</div>
+<head>
+    <meta charset="utf-8" />
+    <title>Application Details Page</title>
+    <meta name="author" content="Ray Parker and Daniel He - Fall 2022 at the University of Utah" />
+    <meta name="description" content="TA Application Details">
+    <meta name="keywords" content="HTML, CSS">
+
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+          crossorigin="anonymous">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css"
+          rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx"
+          crossorigin="anonymous">
+
+    <link href="https://getbootstrap.com/docs/5.2/assets/css/docs.css" rel="stylesheet">
+
+    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="stylesheet" href="Site.css" />
+    <link rel="stylesheet" href="ApplicationDetails.css" />
+</head>

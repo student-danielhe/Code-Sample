@@ -1,0 +1,113 @@
+﻿<!--
+  Authors:   Ray Parker and Daniel He
+  Date:      October 7th, 2022
+  Course:    CS 4540, University of Utah, School of Computing
+  Copyright: CS 4540 and Daniel He and Ray Parker - This work may not be copied for use in Academic Coursework.
+  We, Daniel He and Ray Parker, certify that we wrote this code from scratch and did not copy it in part or whole from
+  another source.  Any references used in the completion of the assignment are cited in my README file.
+
+  File Contents:
+    This is the edit page for the application and allows the signed-in user to edit their own application. File uploads are handled here
+    and then can be viewd in the Details page after being uploaded.
+-->
+
+@model TAApplication.Models.Application
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>Application</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="ID" />
+            <div class="form-group">
+                <label asp-for="pursuit" class="control-label"></label>
+                <select asp-for="pursuit"
+                        asp-items="@Html.GetEnumSelectList<Degree>()"
+                        class="form-control"></select>
+                <span asp-validation-for="pursuit" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="department" class="control-label"></label>
+                <input asp-for="department" class="form-control" />
+                <span asp-validation-for="department" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="GPA" class="control-label"></label>
+                <input asp-for="GPA" class="form-control" />
+                <span asp-validation-for="GPA" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="workHours" class="control-label"></label>
+                <input asp-for="workHours" class="form-control" />
+                <span asp-validation-for="workHours" class="text-danger"></span>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="weekBefore" /> @Html.DisplayNameFor(model => model.weekBefore)
+                </label>
+            </div>
+            <div class="form-group">
+                <label asp-for="semesters" class="control-label"></label>
+                <input asp-for="semesters" class="form-control" />
+                <span asp-validation-for="semesters" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="personalStatement" class="control-label"></label>
+                <textarea asp-for="personalStatement" class="form-control"></textarea>
+                <span asp-validation-for="personalStatement" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="transfer" class="control-label"></label>
+                <input asp-for="transfer" class="form-control" />
+                <span asp-validation-for="transfer" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="linkedin" class="control-label"></label>
+                <input asp-for="linkedin" class="form-control" />
+                <span asp-validation-for="linkedin" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+
+        <form method="post"
+              enctype="multipart/form-data"
+              asp-controller="Applications"
+              asp-action="FileUpload">
+            <input type="submit" value="Upload PDF Resume" />
+            <br />
+            <input type="file" name="files" multiple />
+            <input hidden name="category" value="resume" />
+            <input hidden name="applicationID" value="@Model.ID" />
+
+        </form>
+
+        <form method="post"
+              enctype="multipart/form-data"
+              asp-controller="Applications"
+              asp-action="FileUpload">
+            <input type="submit" value="Upload PNG Profile Image" />
+            <br />
+            <input type="file" name="files" multiple />
+            <input hidden name="category" value="photo" />
+            <input hidden name="applicationID" value="@Model.ID" />
+
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

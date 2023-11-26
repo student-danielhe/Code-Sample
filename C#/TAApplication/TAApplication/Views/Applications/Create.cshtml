@@ -1,0 +1,107 @@
+﻿<!--
+  Authors:   Ray Parker and Daniel He
+  Date:      October 7th, 2022
+  Course:    CS 4540, University of Utah, School of Computing
+  Copyright: CS 4540 and Daniel He and Ray Parker - This work may not be copied for use in Academic Coursework.
+  We, Daniel He and Ray Parker, certify that we wrote this code from scratch and did not copy it in part or whole from
+  another source.  Any references used in the completion of the assignment are cited in my README file.
+
+  File Contents:
+  This is the actual application page for any interested TA students. Any interested TA can fill out the data on this
+    page and save it for the professors/admins to review later. It currently saves the data into the database.
+-->
+
+@model TAApplication.Models.Application
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+
+    <div class="text-center">
+        <p>
+            <div class="container">
+                <main>
+                    <div class="py-5 text-center">
+
+                        <h2>Create Application</h2>
+                        <div>
+                            <a asp-action="Index">Back to List</a>
+                        </div>
+
+                        <hr />
+                    </div>
+                    <div class="row mb-3 text-center">
+                                <h4 class="mb-3">Applicant Information</h4>
+
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <form asp-action="Create">
+                                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                                            <div class="form-group">
+                                                <label asp-for="pursuit" class="control-label"></label>
+                                                <select asp-for="pursuit"
+                                                    asp-items="@Html.GetEnumSelectList<Degree>()"
+                                                    class="form-control"></select>
+                                                <span asp-validation-for="pursuit" class="text-danger"></span>
+                                            </div>
+                                            <div class="form-group">
+                                                <label asp-for="department" class="control-label"></label>
+                                                <input asp-for="department" class="form-control" />
+                                                <span asp-validation-for="department" class="text-danger"></span>
+                                            </div>
+                                            <div class="form-group">
+                                                <label asp-for="GPA" class="control-label"></label>
+                                                <input asp-for="GPA" class="form-control" />
+                                                <span asp-validation-for="GPA" class="text-danger"></span>
+                                            </div>
+                                            <div class="form-group">
+                                                <label asp-for="workHours" class="control-label"></label>
+                                                <input asp-for="workHours" class="form-control" />
+                                                <span asp-validation-for="workHours" class="text-danger"></span>
+                                            </div>
+                                            <div class="form-group form-check">
+                                                <label class="form-check-label">
+                                                    <input class="form-check-input" asp-for="weekBefore" /> @Html.DisplayNameFor(model => model.weekBefore)
+                                                </label>
+                                            </div>
+                                            <div class="form-group">
+                                                <label asp-for="semesters" class="control-label"></label>
+                                                <input asp-for="semesters" class="form-control" />
+                                                <span asp-validation-for="semesters" class="text-danger"></span>
+                                            </div>
+                                            <div class="form-group">
+                                                <label asp-for="personalStatement" class="control-label"></label>
+                                                <textarea asp-for="personalStatement" class="form-control"></textarea>
+                                                <span asp-validation-for="personalStatement" class="text-danger"></span>
+                                            </div>
+                                            <div class="form-group">
+                                                <label asp-for="transfer" class="control-label"></label>
+                                                <input asp-for="transfer" class="form-control" />
+                                                <span asp-validation-for="transfer" class="text-danger"></span>
+                                            </div>
+                                            <div class="form-group">
+                                                <label asp-for="linkedin" class="control-label"></label>
+                                                <input asp-for="linkedin" class="form-control" />
+                                                <span asp-validation-for="linkedin" class="text-danger"></span>
+                                            </div>
+                                            <div class="form-group">
+                                                <input type="submit" value="Create" class="btn btn-primary" />
+                                            </div>
+                                        </form>
+
+                                    </div>
+                                </div>
+                    </div>
+
+                </main>
+
+                <footer class="pt-3 mt-4 text-muted border-top">
+                    © 2022
+                </footer>
+            </div>
+        </p>
+    </div>

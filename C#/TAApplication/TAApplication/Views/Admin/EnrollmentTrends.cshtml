@@ -1,0 +1,100 @@
+﻿<!--
+  Authors:   Ray Parker and Daniel He
+  Date:      December 2nd, 2022
+  Course:    CS 4540, University of Utah, School of Computing
+  Copyright: CS 4540 and Daniel He and Ray Parker - This work may not be copied for use in Academic Coursework.
+  We, Daniel He and Ray Parker, certify that we wrote this code from scratch and did not copy it in part or whole from
+  another source.  Any references used in the completion of the assignment are cited in my README file.
+
+  File Contents:
+This view utilizes the Highcharts and jQuery Datepicker libraries in order to create an interactive chart system that displays
+the trends of student enrollments for specific CS courses. The user must specify both start/end dates and the chart will display
+data amongst the graph.
+-->
+@model TAApplication.Models.Enrollments
+
+@using TAApplication.Areas.Data
+@using Microsoft.AspNetCore.Identity
+@inject UserManager<TAUser> um;
+@inject RoleManager<IdentityRole> rm;
+
+@{
+    ViewData["Title"] = "Enrollment Trends";
+}
+
+<head>
+
+    @section Styles {
+    }
+
+    @section Scripts {
+
+        <title>jQuery UI Datepicker - Default functionality</title>
+        <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+        <link rel="stylesheet" href="/resources/demos/style.css">
+        <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+        <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+        <script src="https://code.highcharts.com/highcharts.js"></script>
+        <script src="https://code.highcharts.com/themes/dark-unica.js"></script>
+
+
+        <!-- Commented out for dark mode functionality; the rest of highcharts still works
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highcharts/10.3.2/css/highcharts.min.css" integrity="sha512-EdQYgIlsKc4GejWW6mB4JgQPrsvuwR+365Zr86uNx4sd+9vFxyhJxPzEV7axYLTULBdmdR4jGsK20MmkJoTHHg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+        <script 
+            src="https://cdnjs.cloudflare.com/ajax/libs/highcharts/10.3.2/highcharts.js" 
+            integrity="sha512-JVzXlL1mZb/G0YNUJtPqUzA/QtPMQLNpCtEBOV9R8P3Uskp4W0C+6SVZ3rpwnKcp/V/59YQoGNUYmB/N6do1sA==" 
+            crossorigin="anonymous" 
+            referrerpolicy="no-referrer">
+        </script>
+        -->
+        <script src="~/js/Admin/EnrollmentTrends.js"></script>
+    }
+</head>
+
+
+
+
+ <div class="row">
+  <div class="col-sm-4">
+        <p>Start Date: <input type="text" id="datepicker"></p>
+  </div>
+  <div class="col-sm-4">
+        <p>End Date: <input type="text" id="datepicker2"></p>
+  </div>
+  <div class="col-sm-4">
+        <div class="form-group">
+            <select id="dropdown" class="form-control">
+                <!-- using javascript function from EnrollmentTrends.js, represent as dropdown list here -->
+                <option>CS 1400</option>
+                <option>CS 1410</option>
+                <option>CS 1420</option>
+                <option>CS 2100</option>
+                <option>CS 2420</option>
+                <option>CS 3100</option>
+                <option>CS 3200</option>
+                <option>CS 3500</option>
+                <option>CS 4150</option>
+                <option>CS 4400</option>
+                <option>CS 4480</option>
+                <option>CS 4500</option>
+                <option>CS 4530</option>
+            </select>
+        </div>
+        <button type="button" onclick="add_line()">Get Data</button>
+    </div>
+</div> 
+
+<hr />
+
+<figure class="highcharts-figure">
+    <div id="EnrollmentChart"></div>
+    <p class="highcharts-description">
+    </p>
+</figure>
+
+
+<figure class="highcharts-figure">
+    <div id="EnrollmentChart2"></div>
+    <p class="highcharts-description">
+    </p>
+</figure>

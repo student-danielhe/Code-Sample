@@ -1,0 +1,182 @@
+﻿<!--
+  Authors:   Ray Parker and Daniel He
+  Date:      October 7th, 2022
+  Course:    CS 4540, University of Utah, School of Computing
+  Copyright: CS 4540 and Daniel He and Ray Parker - This work may not be copied for use in Academic Coursework.
+  We, Daniel He and Ray Parker, certify that we wrote this code from scratch and did not copy it in part or whole from
+  another source.  Any references used in the completion of the assignment are cited in my README file.
+
+  File Contents:
+    These are all of the details of the current application. This code is partially scaffolded by the Application model to show 
+    all the details of the application. Instead of file uploads being done here, the files must be uploaded first through the Edit page 
+    and their resulting links will show up on this Details page.
+-->
+
+@model TAApplication.Models.Application
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+
+<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>Application Details Page</title>
+    <meta name="author" content="Ray Parker and Daniel He - Fall 2022 at the University of Utah" />
+    <meta name="description" content="TA Application Details">
+    <meta name="keywords" content="HTML, CSS">
+
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+          crossorigin="anonymous">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css"
+          rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx"
+          crossorigin="anonymous">
+
+    <link href="https://getbootstrap.com/docs/5.2/assets/css/docs.css" rel="stylesheet">
+
+    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="stylesheet" href="Site.css" />
+    <link rel="stylesheet" href="ApplicationDetails.css" />
+</head>
+
+
+        <div class="py-5 text-center">
+
+            <h2>Application Details</h2>
+        </div>
+        <div class="row mb-3 text-center">
+            <div class="col-md-8 themed-grid-col">
+                <div class="col-md-7 col-lg-8">
+                    <h4 class="mb-3">Applicant Information</h4>
+                    <hr />                        
+                    <p> Current User: @Html.DisplayFor(model => model.User.UserName)</p>
+                    <p> Current Unid: @Html.DisplayFor(model => model.User.Unid)</p>
+                    <hr />
+
+
+            <!-- PS8 Code-->
+            <p>Total Time Available: </p>
+            <div id="totalTime"></div>
+            <a asp-controller="Slots" asp-action="Index">View Availability</a>
+
+            <script>
+                $.ajax({
+                    type: "GET",
+                    url: "Slots/GetSchedule",
+                    success: function (data) {
+                        var totalTime = 0;
+                        data.forEach(function (element) {
+                            if (!element.isAvailable) {
+                                totalTime += 15;
+                            }
+                        });
+                        $("#totalTime").text(totalTime);
+                    }
+                });
+
+            </script>
+
+
+                <div>
+                    <dl class="row">
+                        <dt class = "col-sm-2">
+                            @Html.DisplayNameFor(model => model.pursuit)
+                        </dt>
+                        <dd class = "col-sm-10">
+                            @Html.DisplayFor(model => model.pursuit)
+                        </dd>
+                        <dt class = "col-sm-2">
+                            @Html.DisplayNameFor(model => model.department)
+                        </dt>
+                        <dd class = "col-sm-10">
+                            @Html.DisplayFor(model => model.department)
+                        </dd>
+                        <dt class = "col-sm-2">
+                            @Html.DisplayNameFor(model => model.GPA)
+                        </dt>
+                        <dd class = "col-sm-10">
+                            @Html.DisplayFor(model => model.GPA)
+                        </dd>
+                        <dt class = "col-sm-2">
+                            @Html.DisplayNameFor(model => model.workHours)
+                        </dt>
+                        <dd class = "col-sm-10">
+                            @Html.DisplayFor(model => model.workHours)
+                        </dd>
+                        <dt class = "col-sm-2">
+                            @Html.DisplayNameFor(model => model.weekBefore)
+                        </dt>
+                        <dd class = "col-sm-10">
+                            @Html.DisplayFor(model => model.weekBefore)
+                        </dd>
+                        <dt class = "col-sm-2">
+                            @Html.DisplayNameFor(model => model.semesters)
+                        </dt>
+                        <dd class = "col-sm-10">
+                            @Html.DisplayFor(model => model.semesters)
+                        </dd>
+                        <dt class = "col-sm-2">
+                            @Html.DisplayNameFor(model => model.personalStatement)
+                        </dt>
+                        <dd class = "col-sm-10">
+                            @Html.DisplayFor(model => model.personalStatement)
+                        </dd>
+                        <dt class = "col-sm-2">
+                            @Html.DisplayNameFor(model => model.transfer)
+                        </dt>
+                        <dd class = "col-sm-10">
+                            @Html.DisplayFor(model => model.transfer)
+                        </dd>
+                        <dt class = "col-sm-2">
+                            @Html.DisplayNameFor(model => model.linkedin)
+                        </dt>
+                        <dd class = "col-sm-10">
+                            @Html.DisplayFor(model => model.linkedin)
+                        </dd>
+                    </dl>
+                </div>
+
+                @if (User.IsInRole("Admin") || User.IsInRole("Applicant")) { 
+                 <div>
+                    <a asp-action="Edit" asp-route-id="@Model?.ID">Edit</a> |
+                    <a asp-action="Delete" asp-route-id="@Model?.ID">Delete</a> |
+                    <a asp-action="Index">Back to List</a>
+                </div>
+
+                }
+
+                <p>
+                    @ViewData["ErrorMessage"]
+                </p>
+
+                @{
+                    var resumePath = "/uploads/" + Model.resume;
+                    var photoPath = "/uploads/" + Model.photo;
+                }
+
+                <a href="@resumePath""> Resume </a>
+
+                <br>
+
+                <a href="@photoPath" target="_blank"> Profile Picture </a>
+
+            <hr>
+            <p> Last Created by @Html.DisplayFor(model => model.ModifiedBy) </p>
+            <br>
+            <p> Last Modified by @Html.DisplayFor(model => model.ModificationDate) </p>
+
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"></script>
+

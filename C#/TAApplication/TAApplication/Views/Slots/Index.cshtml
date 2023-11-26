@@ -1,0 +1,50 @@
+﻿<!--
+Authors:   Ray Parker and Daniel He
+  Date:      November 11th, 2022
+  Course:    CS 4540, University of Utah, School of Computing
+  Copyright: CS 4540 and Daniel He and Ray Parker - This work may not be copied for use in Academic Coursework.
+  We, Daniel He and Ray Parker, certify that we wrote this code from scratch and did not copy it in part or whole from
+  another source.  Any references used in the completion of the assignment are cited in my README file.
+
+File Contents:
+    This is the index page for the Slot availability information. This file references the AvailabilityTracker.js for most 
+    of the code functionality. In this file, it specifies the canvas, save data buttons, and spinner/loaders during saving.
+ -->
+
+@model IEnumerable<TAApplication.Models.Slot>
+@using TAApplication.Areas.Data
+@using Microsoft.AspNetCore.Identity
+@inject UserManager<TAUser> um;
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+@section Scripts
+{
+    <!-- Libraries -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pixi.js/6.2.0/browser/pixi.js"></script>
+    <script src="~/js/AvailabilityTracker.js"> </script>
+}
+
+<body>
+
+    <h1>Course Availability</h1>
+    <p>
+        Please indicate all the times that you will be available during the week. 
+        This information is used by the hiring committee and professors to determine class coverage, lab coverage, office hour coverage, etc.
+    </p> 
+    <p>(Note: Any work necessary on the weekends is up to you and your professor to negotiate.)</p>
+    <br />
+    <p>If your schedule changes, please come back and update this record.</p>
+
+    <div id="Scripts">
+        <div id="canvas_div"></div>
+        <button id="savebutton" onclick="save_data()">Save</button>
+        <p id="savedatamsg">Saved data!</p>
+
+        <div id="spinner" class="loader"></div>
+    </div>
+        
+</body>

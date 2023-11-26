@@ -1,0 +1,95 @@
+﻿<!--
+  Authors:    Ray Parker and Daniel He
+  Date:      October 7th, 2022
+  Course:    CS 4540, University of Utah, School of Computing
+  Copyright: CS 4540 and Daniel He and Ray Parker - This work may not be copied for use in Academic Coursework.
+  We, Daniel He and Ray Parker, certify that we wrote this code from scratch and did not copy it in part or whole from
+  another source.  Any references used in the completion of the assignment are cited in my README file.
+
+  File Contents:
+    This is the list view of all the current School of Computing TA applications.
+-->
+
+@model IEnumerable<TAApplication.Models.Application>
+
+@{
+    ViewData["Title"] = "List";
+}
+
+<h1>List of Applicants</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.User.UserName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.pursuit)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.department)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.GPA)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.workHours)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.weekBefore)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.semesters)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.linkedin)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ModificationDate)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.User.UserName) 
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.pursuit)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.department)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.GPA)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.workHours)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.weekBefore)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.semesters)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.linkedin)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ModificationDate)
+            </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.ID">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.ID">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.ID">Delete</a>
+                </td>
+        </tr>
+}
+    </tbody>
+</table>

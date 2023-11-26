@@ -1,0 +1,228 @@
+﻿<!--
+  Authors:   Ray Parker and Daniel He
+  Date:      September 27th, 2022
+  Course:    CS 4540, University of Utah, School of Computing
+  Copyright: CS 4540 and Daniel He and Ray Parker - This work may not be copied for use in Academic Coursework.
+  We, Daniel He and Ray Parker, certify that we wrote this code from scratch and did not copy it in part or whole from
+  another source.  Any references used in the completion of the assignment are cited in my README file.
+  File Contents:
+   
+  This is the actual application page for any interested TA students. Any interested TA can fill out the data on this
+    page and save it for the professors/admins to review later. Currently it doesn't save the data and all current data
+    is used as a placeholder. Only applicant roles can access this page.
+-->
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    <p>
+        <div class="container">
+            <main>
+                <div class="py-5 text-center">
+
+                    <h2>Application Form</h2>
+                    <p class="lead">TODO: Form Description Here</p>
+                </div>
+                <div class="row mb-3 text-center">
+                    <div class="col-md-8 themed-grid-col">
+                        <div class="col-md-7 col-lg-8">
+                            <h4 class="mb-3">Applicant Information</h4>
+                            <form class="needs-validation" novalidate="">
+                                <div class="row g-3">
+                                    <div class="col-sm-6">
+                                        <label for="firstName" class="form-label">First name</label>
+                                        <input type="text" class="form-control" id="firstName" placeholder="" value="" required="">
+                                        <div class="invalid-feedback">
+                                            Valid first name is required.
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-6">
+                                        <label for="lastName" class="form-label">Last name</label>
+                                        <input type="text" class="form-control" id="lastName" placeholder="" value="" required="">
+                                        <div class="invalid-feedback">
+                                            Valid last name is required.
+                                        </div>
+                                    </div>
+
+                                    <div class="col-12">
+                                        <label for="username" class="form-label">Course Applying For</label>
+                                        <div class="input-group has-validation">
+
+                                            <input type="text" class="form-control" placeholder="CS4540" required="">
+                                            <div class="invalid-feedback">
+                                                Course information required
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <label for="GPA" class="form-label">U of U GPA</label>
+                                        <div class="input-group has-validation">
+
+                                            <input type="text" class="form-control" placeholder="4.0" required="">
+                                            <div class="invalid-feedback">
+                                                GPA required
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-12">
+                                        <label for="address" class="form-label">Address</label>
+                                        <input type="text" class="form-control" id="address" placeholder="1234 Main St" required="">
+                                        <div class="invalid-feedback">
+                                            Please enter your address.
+                                        </div>
+                                    </div>
+
+                                    <div class="col-12">
+                                        <label for="address2" class="form-label">Address 2 <span class="text-muted">(Optional)</span></label>
+                                        <input type="text" class="form-control" id="address2" placeholder="Apartment or suite">
+                                    </div>
+
+                                    <div class="col-md-5">
+                                        <label for="Department" class="form-label">Department</label>
+                                        <select class="form-select" id="Department" required="">
+                                            <option value="">CS</option>
+                                            <option>...</option>
+                                        </select>
+                                        <div class="invalid-feedback">
+                                            Department required.
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-4">
+                                        <label for="gender" class="form-label">Gender</label>
+                                        <select class="form-select" id="gender" required="">
+                                            <option value="">Male</option>
+                                            <option>Female</option>
+                                        </select>
+                                        <div class="invalid-feedback">
+                                            Gender required.
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-3">
+                                        <label for="age" class="form-label">Age</label>
+                                        <input type="number" class="form-control" id="zip" placeholder="" required="">
+                                        <div class="invalid-feedback">
+                                            Age required.
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <hr class="my-4">
+
+                                <div class="form-check">
+                                    <input type="checkbox" class="form-check-input" id="same-address">
+                                    <label class="form-check-label" for="same-address">Living in SLC</label>
+                                </div>
+
+                                <div class="form-check">
+                                    <input type="checkbox" class="form-check-input" id="save-info">
+                                    <label class="form-check-label" for="save-info">Fluent in English</label>
+                                </div>
+
+                                <hr class="my-4">
+
+                                <h4 class="mb-3">Best way to Contact</h4>
+
+                                <div class="my-3">
+                                    <div class="form-check">
+                                        <input id="credit" name="paymentMethod" type="radio" class="form-check-input" checked="" required="">
+                                        <label class="form-check-label" for="credit">Phone</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input id="debit" name="paymentMethod" type="radio" class="form-check-input" required="">
+                                        <label class="form-check-label" for="debit">Email</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input id="paypal" name="paymentMethod" type="radio" class="form-check-input" required="">
+                                        <label class="form-check-label" for="paypal">Other</label>
+                                    </div>
+                                </div>
+
+                                <div class="row gy-3">
+                                    <div class="col-md-6">
+                                        <label for="cc-name" class="form-label">Phone Number</label>
+                                        <input type="text" class="form-control" id="cc-name" placeholder="" required="">
+
+                                        <div class="invalid-feedback">Phone Number Required</div>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <label for="cc-number" class="form-label">Email Address</label>
+                                        <input type="text" class="form-control" id="cc-number" placeholder="" required="">
+                                        <div class="invalid-feedback">
+                                            Email Required
+                                        </div>
+                                    </div>
+
+                                    <div class="col-12">
+                                        <label for="address2" class="form-label">Other <span class="text-muted">(Optional)</span></label>
+                                        <input type="text" class="form-control" id="other" placeholder="">
+                                    </div>
+
+
+                                </div>
+
+                                <hr class="my-4">
+
+                                <button class="w-100 btn btn-primary btn-lg" type="submit">Apply</button>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="col-md-4 themed-grid-col">
+                        <div class="row g-5">
+                            <img class="p-5 mb-4 bg-light rounded-3" src="Picture/Profile.png" alt="add picture">
+                            <a class="btn btn-lg btn-primary" href="#" role="button">Edit Profile Pic</a>
+                        </div>
+
+                        <div class="form-group" id="statement">
+                            <label for="exampleFormControlFile1">Add Personal Statement</label>
+                            <input type="file" class="form-control-file" id="exampleFormControlFile1">
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </main>
+
+            <footer class="pt-3 mt-4 text-muted border-top">
+                © 2022
+            </footer>
+        </div>
+    </p>
+</div>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Create a TA Application Form">
+    <meta name="author" content="Ray Parker and Daniel He - Fall 2022 at the University of Utah">
+    <!-- The authors of the initial Checkout example are Mark Otto, Jacob Thornton, and Bootstrap contributors -->
+    <meta name="generator" content="Hugo 0.101.0">
+    <title>Application Form</title>
+
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+          crossorigin="anonymous">
+
+    <link href="https://getbootstrap.com/docs/5.2/assets/css/docs.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css"
+          rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx"
+          crossorigin="anonymous">
+
+    <!-- Custom styles for this template -->
+    <link href="form-validation.css" rel="stylesheet">
+
+    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="stylesheet" href="Site.css" />
+    <link rel="stylesheet" href="ApplicationCreate.css" />
+</head>
